@@ -1,0 +1,7 @@
+callus.form:
+  path: '/admin/config/user-interface/call-us'
+  defaults:
+    _form: '\Drupal\callus\Form\CallUsForm'
+    _title: 'Call Us'
+  requirements:
+    _permission: 'administer site configuration'

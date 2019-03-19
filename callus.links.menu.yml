@@ -1,0 +1,6 @@
+callus.admin:
+  title: 'Call Us'
+  description: 'Call Us settings'
+  parent: system.admin_config_ui
+  route_name: callus.form
+
