@@ -13,7 +13,6 @@ class CallUsForm extends ConfigFormBase {
   /**
    * Implements getEditableConfigNames().
    */
-
   protected function getEditableConfigNames() {
     return [
       'callus.settings',
@@ -23,7 +22,6 @@ class CallUsForm extends ConfigFormBase {
   /**
    * Implements getFormId().
    */
-
   public function getFormId() {
     return 'callus_form';
   }
@@ -31,13 +29,10 @@ class CallUsForm extends ConfigFormBase {
   /**
    * Implements buildForm().
    */
-
   public function buildForm(array $form, FormStateInterface $form_state) {
 
     $config = $this->config('callus.settings');
-
 //Button Settings
-
     $form['callus_custom_settings'] = [
       '#type' => 'details',
       '#title' => $this->t('Callus Button Settings'),
@@ -81,7 +76,6 @@ class CallUsForm extends ConfigFormBase {
     );
 
 //Social Button Settings
-
      $form['social_settings'] = [
       '#type' => 'details',
       '#title' => $this->t('Social Media settings (Optional)'),
@@ -124,9 +118,7 @@ class CallUsForm extends ConfigFormBase {
   /**
    * Implement submitForm().
    */
-
   public function submitForm(array &$form, FormStateInterface $form_state) {
-
     $phone_number = $form_state->getValues('cms_phone_number');
     $button_lable = $form_state->getValues('cms_button_lable');
     $button_side = $form_state->getValues('cms_button_side');
@@ -140,13 +132,11 @@ class CallUsForm extends ConfigFormBase {
     $cms_youtube = $form_state->getValues('cms_youtube');
 
     $config = $this->config('callus.settings')
-
       ->set('cms_phone_number', $phone_number['cms_phone_number'])
       ->set('cms_button_lable', $button_lable['cms_button_lable'])
       ->set('cms_button_side', $button_side['cms_button_side'])
       ->set('cms_color_picker', $color_picker['cms_color_picker'])
       ->set('cms_color_font', $cms_color_font['cms_color_font'])
-
       //Social Set
       ->set('cms_facebook', $cms_facebook['cms_facebook'])
       ->set('cms_gmail', $cms_gmail['cms_gmail'])

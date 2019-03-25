@@ -7,6 +7,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 function callus_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     case 'help.page.callus':
+     //dpm($route_name);
       $output = '<p>'. t('This module places a Call Now button (click-to-call) to the bottom of the screen which is only visible for your mobile visitors. Because your mobile visitors are already holding their phone it will allow them to call you with one simple touch of the button. No more complicated copy-and-pasting or memorizing the phone number!
         Could not be easier!') .'</p>';
 

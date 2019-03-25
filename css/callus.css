@@ -9,7 +9,7 @@
   border-radius: 5px;
   text-align: center;
 }
-.icon-bar {
+#cmssocial {
   position: fixed;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -17,7 +17,7 @@
   transform: translateY(-50%);
 }
 
-.icon-bar a {
+#cmssocial a {
   display: block;
   text-align: center;
   padding: 16px;
@@ -26,7 +26,7 @@
   font-size: 20px;
 }
 
-.icon-bar a:hover {
+#cmssocial a:hover {
   background-color: #000;
 }
 
