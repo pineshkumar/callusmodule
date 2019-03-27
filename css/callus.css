@@ -1,13 +1,16 @@
 .callus {
-  width: 100px;
+  width: 160px;
+  height: 40px;
+  line-height: 40px;
   position: fixed;
-  bottom: 50px;
-  font-size: 20px;
+  bottom: 0px;
+  font-size: 17px;
   text-decoration: none;
   display: inline-block;
   /*text-indent: 9999px;*/
   border-radius: 5px;
   text-align: center;
+  box-shadow: 1px 2px 5px #000000;
 }
 #cmssocial {
   position: fixed;
@@ -31,12 +34,12 @@
 }
 
 .icon-bar .facebook {
-  background: #3B5998;
+  background: #3b5998;
   color: white;
 }
 
 .icon-bar .twitter {
-  background: #55ACEE;
+  background: #55acee;
   color: white;
 }
 
@@ -55,8 +58,12 @@
   color: white;
 }
 
-#cms_callus a:hover{
-    text-decoration: none;
+a.callus:hover {
+  text-decoration: none;
+  /*transform: scale(1.5) rotate(12deg);*/
+  opacity: 0.9;
+  /*-webkit-transform: translateY(5px);
+  transform: translateY(5px);*/
 }
 
 @media (max-width: 580px) {
@@ -64,5 +71,5 @@
     left: 0px;
     width: 100%;
   }
-    /* CSS stuff */
+  /* CSS stuff */
 }

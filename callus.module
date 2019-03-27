@@ -1,41 +1,29 @@
 <?php
+
+/**
+ * @file
+ * Functions for the callus module.
+ */
+
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
- * Implementation of hook_help().
+ * Implementation of callus_help().
  */
 function callus_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     case 'help.page.callus':
-     //dpm($route_name);
-      $output = '<p>'. t('This module places a Call Now button (click-to-call) to the bottom of the screen which is only visible for your mobile visitors. Because your mobile visitors are already holding their phone it will allow them to call you with one simple touch of the button. No more complicated copy-and-pasting or memorizing the phone number!
-        Could not be easier!') .'</p>';
-
-      $output .= '<h3>'. t('How to use the plugin') .'</h3>';
-      $output .= t('<strong>IMPORTANT:</strong> The first field in order of appearance will be the one used as the "phone number" of the web to contact.') .'<br />';
-
-      $output .= '<h4>'. t('Your Callus must meet these requirements:') .'</h4>';
+      $output = '<p>' . t('This module places a Call Now button (click-to-call) to the bottom of the screen which is only visible for your mobile visitors. Because your mobile visitors are already holding their phone it will allow them to call you with one simple touch of the button. No more complicated copy-and-pasting or memorizing the phone number!
+        Could not be easier!') . '</p>';
+      $output .= '<h3>' . t('How to use the plugin') . '</h3>';
+      $output .= t('<strong>IMPORTANT:</strong> The first field in order of appearance will be the one used as the "phone number" of the web to contact.') . '<br />';
+      $output .= '<h4>' . t('Your Callus must meet these requirements:') . '</h4>';
       $output .= '<ul>';
-      $output .= '<li>'. t('<em>phone</em> must be set to <em>Fields</em>.') .'</li>';
+      $output .= '<li>' . t('<em>phone</em> must be set to <em>Fields</em>.') . '</li>';
       $output .= '</ul>';
-
-      $output .= '<h4>'. t('Choose <em>Call Us</em> in the <em>Style</em> dialog within your view, which will prompt you to configure the settings.') .'</h4>';
+      $output .= '<h4>' . t('Choose <em>Call Us</em> in the <em>Style</em> dialog within your view, which will prompt you to configure the settings.') . '</h4>';
       return $output;
   }
-}
-/**
- * Implements hook_install().
- */
-function callus_install() {
-  $defaultThemeName = \Drupal::config('system.theme')->get('default');
-  \Drupal::configFactory()->getEditable('callus.settings')
-    ->set('cms_button_side', 1)
-    ->set('cms_phone_number', '0000000000')
-    ->set('cms_button_lable', 'Call Us')
-    ->set('cms_color_picker', '#4CAF50')
-    ->set('cms_color_font', '#fff')
-    ->set('callus_themename', [$defaultThemeName])
-    ->save();
 }
 
 /**
@@ -45,18 +33,20 @@ function callus_preprocess_page(&$variables) {
   $config = \Drupal::config('callus.settings');
   $theme_selected = $config->get('callus_themename');
   $active_theme = \Drupal::service('theme.manager')->getActiveTheme()->getName();
+  // If condition for the frontend active theme showing this functionality.
   if (array_keys($theme_selected, $active_theme)) {
-  $variables['#attached']['library'][] = 'callus/callus';
-  $variables['#attached']['drupalSettings']['cms_phone_number'] = $config->get('cms_phone_number');
-  $variables['#attached']['drupalSettings']['cms_button_lable'] = $config->get('cms_button_lable');
-  $variables['#attached']['drupalSettings']['cms_button_side'] = $config->get('cms_button_side');
-  $variables['#attached']['drupalSettings']['cms_color_picker'] = $config->get('cms_color_picker');
-  $variables['#attached']['drupalSettings']['cms_color_font'] = $config->get('cms_color_font');
-  //social
-  $variables['#attached']['drupalSettings']['cms_facebook'] = $config->get('cms_facebook');
-  $variables['#attached']['drupalSettings']['cms_gmail'] = $config->get('cms_gmail');
-  $variables['#attached']['drupalSettings']['cms_twitter'] = $config->get('cms_twitter');
-  $variables['#attached']['drupalSettings']['cms_linkedin'] = $config->get('cms_linkedin');
-  $variables['#attached']['drupalSettings']['cms_youtube'] = $config->get('cms_youtube');
+    $variables['#attached']['library'][] = 'callus/callus';
+    // Callus button get setting values.
+    $variables['#attached']['drupalSettings']['cms_phone_number'] = $config->get('cms_phone_number');
+    $variables['#attached']['drupalSettings']['cms_button_lable'] = $config->get('cms_button_lable');
+    $variables['#attached']['drupalSettings']['cms_button_side'] = $config->get('cms_button_side');
+    $variables['#attached']['drupalSettings']['cms_color_picker'] = $config->get('cms_color_picker');
+    $variables['#attached']['drupalSettings']['cms_color_font'] = $config->get('cms_color_font');
+    // Social button getting values.
+    $variables['#attached']['drupalSettings']['cms_facebook'] = $config->get('cms_facebook');
+    $variables['#attached']['drupalSettings']['cms_gmail'] = $config->get('cms_gmail');
+    $variables['#attached']['drupalSettings']['cms_twitter'] = $config->get('cms_twitter');
+    $variables['#attached']['drupalSettings']['cms_linkedin'] = $config->get('cms_linkedin');
+    $variables['#attached']['drupalSettings']['cms_youtube'] = $config->get('cms_youtube');
   }
 }

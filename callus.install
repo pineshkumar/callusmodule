@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the callus module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function callus_install() {
+  $defaultThemeName = \Drupal::config('system.theme')->get('default');
+  \Drupal::configFactory()->getEditable('callus.settings')
+    ->set('cms_button_side', 1)
+    ->set('cms_phone_number', '0000000000')
+    ->set('cms_button_lable', 'Call US')
+    ->set('cms_color_picker', '#4CAF50')
+    ->set('cms_color_font', '#fff')
+    ->set('callus_themename', [$defaultThemeName])
+    ->save();
+}
