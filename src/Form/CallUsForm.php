@@ -32,6 +32,19 @@ class CallUsForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
 
     $config = $this->config('callus.settings');
+    // Theme setting Visibility Configuration.
+    $form['themename_fieldset'] = [
+      '#title' => $this->t('Theme Visibility Configuration'),
+      '#type' => 'fieldset',
+    ];
+    $form['themename_fieldset']['callus_themename'] = [
+      '#title' => $this->t('Themes Name'),
+      '#description' => $this->t('Call Us button add multiple themes.'),
+      '#type' => 'select',
+      '#multiple' => TRUE,
+      '#options' => $this->getThemeName(),
+      '#default_value' => $config->get('callus_themename'),
+    ];
     // Form for the button setting.
     $form['callus_custom_settings'] = [
       '#type' => 'details',
@@ -115,6 +128,18 @@ class CallUsForm extends ConfigFormBase {
   }
 
   /**
+   * Implement getThemeName().
+   */
+  public function getThemeName() {
+    $theme_handler = \Drupal::service('theme_handler');
+    $themes = $theme_handler->listInfo();
+    foreach ($themes as $key => $val) {
+      $theme_arr[$key] = $val->info['name'];
+    }
+    return $theme_arr;
+  }
+
+  /**
    * Implement validateForm().
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
@@ -143,6 +168,8 @@ class CallUsForm extends ConfigFormBase {
     $cms_twitter = $form_state->getValues('cms_twitter');
     $cms_linkedin = $form_state->getValues('cms_linkedin');
     $cms_youtube = $form_state->getValues('cms_youtube');
+    // Theme name get value.
+    $callus_themename = $form_state->getValues('callus_themename');
 
     $config = $this->config('callus.settings')
       // Set button value setting.
@@ -157,6 +184,8 @@ class CallUsForm extends ConfigFormBase {
       ->set('cms_twitter', $cms_twitter['cms_twitter'])
       ->set('cms_linkedin', $cms_linkedin['cms_linkedin'])
       ->set('cms_youtube', $cms_youtube['cms_youtube'])
+      // Theme name set value.
+      ->set('callus_themename', $callus_themename['callus_themename'])
       ->save();
     parent::submitForm($form, $form_state);
 

@@ -13,8 +13,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 function callus_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     case 'help.page.callus':
-      $output = '<p>' . t('This module places a Call Now button (click-to-call) to the bottom of the screen which is only visible for your mobile visitors. Because your mobile visitors are already holding their phone it will allow them to call you with one simple touch of the button. No more complicated copy-and-pasting or memorizing the phone number!
-        Could not be easier!') . '</p>';
+      $output = '<p>' . t('This module places a Call Us button (click-to-call) to the different different place in your website of the screen which is visible for your mobile visitors and website.This module very useful for website face-time and Mobile Because your mobile visitors are already holding their phone it will allow them to call you with one simple touch of the button. No more complicated copy-and-pasting or memoizing the phone number!.You can also add button for the social link in website with the using of this module.') . '</p>';
       $output .= '<h3>' . t('How to use the plugin') . '</h3>';
       $output .= t('<strong>IMPORTANT:</strong> The first field in order of appearance will be the one used as the "phone number" of the web to contact.') . '<br />';
       $output .= '<h4>' . t('Your Callus must meet these requirements:') . '</h4>';
@@ -48,5 +47,7 @@ function callus_preprocess_page(&$variables) {
     $variables['#attached']['drupalSettings']['cms_twitter'] = $config->get('cms_twitter');
     $variables['#attached']['drupalSettings']['cms_linkedin'] = $config->get('cms_linkedin');
     $variables['#attached']['drupalSettings']['cms_youtube'] = $config->get('cms_youtube');
+    // Theme getting value.
+    $variables['#attached']['drupalSettings']['callus_themename'] = $config->get('callus_themename');
   }
 }

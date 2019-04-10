@@ -23,13 +23,18 @@
           var cms_twitter = drupalSettings.cms_twitter;
           var cms_linkedin = drupalSettings.cms_linkedin;
           var cms_youtube = drupalSettings.cms_youtube;
+          const cms_mq = window.matchMedia( "(min-width: 580px)" );
 
           $('.callus').css({"color":cms_color_font});
           if (cms_button_side == 1) {
             $('.callus').css({"right":"100px","background-color":cms_color_picker});
           }
           else if (cms_button_side == 2) {
-            $('.callus').css({"right":"-60px","height":"40px","transform":"rotate(-90deg)","bottom":"500px","line-height":"40px","background-color":cms_color_picker});
+               if (cms_mq.matches) {  // If media query matches
+                     $('.callus').css({"right":"-60px","height":"40px","transform":"rotate(-90deg)","bottom":"50%","line-height":"40px","background-color":cms_color_picker});
+                    } else {
+                     $('.callus').css({"right":"100px","background-color":cms_color_picker});
+                    }
           } else {
             $('.callus').css({"left":"100px","background-color":cms_color_picker});
           }
