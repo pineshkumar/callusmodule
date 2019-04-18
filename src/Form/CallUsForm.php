@@ -147,6 +147,9 @@ class CallUsForm extends ConfigFormBase {
     if (strlen($phone) < 10) {
       $form_state->setErrorByName('cms_phone_number', $this->t('Mobile number is too short.'));
     }
+    if (strlen($phone) > 10) {
+      $form_state->setErrorByName('cms_phone_number', $this->t('Mobile number is too largest.'));
+    }
     if (!preg_match("/^\+?\d[0-9-]{9,12}/", $phone)) {
       $form_state->setErrorByName('cms_phone_number', $this->t('Mobile number is only numeric Valid.'));
     }
